@@ -92,6 +92,9 @@ footer {
         flex-direction: column;
         align-items: center;
     }
+    .footer-links {
+        width: 100%;
+    }
 }
 
 /* Further adjust for extra small devices (e.g., very small phones) */
