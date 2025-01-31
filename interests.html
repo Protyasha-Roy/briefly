@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Interests - Briefly</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/themes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .search-container {
+            margin: 20px 0;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid var(--text-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: "Open Sans", sans-serif;
+        }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .category-item {
+            border: 2px solid var(--text-color);
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .category-item.selected {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+        .category-item i {
+            display: none;
+        }
+        .category-item.selected i {
+            display: inline-block;
+        }
+        .continue-btn {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-color);
+            border: 2px solid var(--text-color);
+            color: var(--text-color);
+            cursor: pointer;
+            font-family: "Open Sans", sans-serif;
+            margin-top: 20px;
+        }
+        .continue-btn:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="/" style="text-decoration: none; font-weight: bold;">briefly</a> / select interests
+        </div>
+        <button id="theme-toggle" class="theme-toggle">Dark</button>
+    </header>
+
+    <main>
+        <p>Select categories that interest you. This helps us curate content tailored to your preferences.</p>
+        
+        <div class="search-container">
+            <input type="text" id="categorySearch" placeholder="Search categories..." />
+        </div>
+
+        <div class="categories-grid" id="categoriesContainer">
+            <!-- Categories will be populated by JavaScript -->
+        </div>
+
+        <button class="continue-btn" id="continueButton">Continue to Feed</button>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a style="font-weight: 600;" href="/privacy.html">privacy</a>
+            <a style="font-weight: 600;" href="/terms.html">terms</a>
+            <a style="font-weight: 600;" href="/about.html">about</a>
+            <a style="font-weight: 600;" href="/subscribe.html">subscribe</a>
+        </div>
+        <p>&copy; 2025 Briefly. All rights reserved.</p>
+    </footer>
+
+    <script src="/js/theme.js" defer></script>
+    <script>
+        // IndexedDB setup
+        const dbName = "BrieflyDB";
+        const storeName = "userPreferences";
+        let db;
+
+        const request = indexedDB.open(dbName, 1);
+
+        request.onerror = (event) => {
+            console.error("Database error:", event.target.error);
+        };
+
+        request.onupgradeneeded = (event) => {
+            db = event.target.result;
+            if (!db.objectStoreNames.contains(storeName)) {
+                db.createObjectStore(storeName);
+            }
+        };
+
+        request.onsuccess = (event) => {
+            db = event.target.result;
+            loadSelectedCategories();
+        };
+
+        // Categories data
+        const categories = [
+            "Business",
+            "Crime",
+            "Domestic",
+            "Education",
+            "Entertainment",
+            "Environment",
+            "Food",
+            "Health",
+            "Lifestyle",
+            "Politics",
+            "Science",
+            "Sports"
+        ];
+
+        // DOM Elements
+        const categoriesContainer = document.getElementById('categoriesContainer');
+        const searchInput = document.getElementById('categorySearch');
+        const continueButton = document.getElementById('continueButton');
+
+        // Create category elements
+        function createCategoryElements(filterText = '') {
+            categoriesContainer.innerHTML = '';
+            categories
+                .filter(category => category.toLowerCase().includes(filterText.toLowerCase()))
+                .forEach(category => {
+                    const div = document.createElement('div');
+                    div.className = 'category-item';
+                    div.dataset.category = category;
+                    div.innerHTML = `
+                        ${category}
+                        <i class="fas fa-check"></i>
+                    `;
+                    div.addEventListener('click', toggleCategory);
+                    categoriesContainer.appendChild(div);
+                });
+        }
+
+        // Toggle category selection
+        function toggleCategory(event) {
+            const categoryElement = event.currentTarget;
+            categoryElement.classList.toggle('selected');
+            saveSelectedCategories();
+        }
+
+        // Save selected categories to IndexedDB
+        function saveSelectedCategories() {
+            const selectedCategories = Array.from(document.querySelectorAll('.category-item.selected'))
+                .map(el => el.dataset.category);
+
+            const transaction = db.transaction([storeName], "readwrite");
+            const store = transaction.objectStore(storeName);
+            store.put(selectedCategories, "interests");
+        }
+
+        // Load selected categories from IndexedDB
+        function loadSelectedCategories() {
+            const transaction = db.transaction([storeName], "readonly");
+            const store = transaction.objectStore(storeName);
+            const request = store.get("interests");
+
+            request.onsuccess = () => {
+                const selectedCategories = request.result || [];
+                createCategoryElements();
+                selectedCategories.forEach(category => {
+                    const element = document.querySelector(`.category-item[data-category="${category}"]`);
+                    if (element) element.classList.add('selected');
+                });
+            };
+        }
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            createCategoryElements(e.target.value);
+            loadSelectedCategories();
+        });
+
+        // Continue button
+        continueButton.addEventListener('click', () => {
+            const selectedCategories = Array.from(document.querySelectorAll('.category-item.selected'))
+                .map(el => el.dataset.category);
+
+            if (selectedCategories.length === 0) {
+                alert('Please select at least one category');
+                return;
+            }
+
+            window.location.href = '/feed.html';
+        });
+
+        // Initial setup
+        createCategoryElements();
+    </script>
+</body>
+</html>
