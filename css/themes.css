@@ -1,0 +1,51 @@
+/* Light Theme */
+:root {
+    --bg-color: #fffbde;
+    --text-color: #5e5e5e;
+    --link-color: #1e75d2;
+    --card-bg: #f8f9fa;
+    --border-color: #ddd;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-color: #2b2a2a;
+    --text-color: #b3b3b3;
+    --link-color: #87aed5;
+    --card-bg: #1e1e1e;
+    --border-color: #333;
+}
+
+/* Apply Theme Colors */
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: small;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Links */
+a {
+    color: var(--link-color);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Card Component */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+
+.theme-toggle {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 600;
+}

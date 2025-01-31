@@ -1,0 +1,102 @@
+/* Reset & Box Sizing */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/* Default width for larger screens */
+body {
+    width: 40%;
+    margin: 0 auto;
+    padding: 5px;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+main {
+    margin-top: 10px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.features-container {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.feature-box {
+    border: 2px solid #333;
+    transition: transform 0.3s;
+    padding: 5px;
+}
+
+.icon-title {
+    display: flex;
+    align-items: center;
+    /* margin-bottom: 10px; */
+}
+
+.icon-title i {
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.icon-title h3 {
+    margin: 0;
+    font-size: 12px;
+}
+
+.feature-box p {
+    margin: 0;
+    font-size: small;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    /* border: 1px solid var(--border-color); */
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+@media (min-width: 600px) {
+    .features-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    .features-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* Adjust width for smaller screens (phones, tablets) */
+@media screen and (max-width: 760px) {
+    body {
+        width: 100%;
+    }
+    footer {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Further adjust for extra small devices (e.g., very small phones) */
+@media screen and (max-width: 480px) {
+    body {
+        width: 100%;
+    }
+}
