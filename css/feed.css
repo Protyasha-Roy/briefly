@@ -10,7 +10,7 @@ header {
 .nav-tabs {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 }
 
 .nav-link {
@@ -58,8 +58,8 @@ header {
 
 .blog-article {
     /* background: var(--card-bg); */
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    /* border: 1px solid var(--border-color); */
 }
 
 .article-image {
@@ -81,7 +81,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
 }
 
 .category {
@@ -206,12 +205,4 @@ header {
         flex-wrap: wrap;
     }
     
-    header {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .subscribe-btn {
-        width: 100%;
-    }
 }
