@@ -18,11 +18,13 @@
 
 /* Apply Theme Colors */
 body {
-    font-family: "Open Sans", sans-serif;
-    font-size: small;
+    font-family: "Roboto Mono", serif;
+    font-weight: 400;
+    font-style: normal;
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
+    font-size: 12px;
 }
 
 /* Links */

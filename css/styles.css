@@ -9,7 +9,6 @@ body {
     width: 40%;
     margin: 0 auto;
     padding: 5px;
-    font-size: 16px;
     line-height: 1.8;
 }
 
@@ -48,12 +47,13 @@ header {
 
 .icon-title h3 {
     margin: 0;
-    font-size: 12px;
+    font-size: 10px;
+    font-weight: 700;
 }
 
 .feature-box p {
     margin: 0;
-    font-size: small;
+    font-size: 10px;
 }
 
 footer {
