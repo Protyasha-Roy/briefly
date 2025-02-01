@@ -86,6 +86,7 @@ header {
 
 .category {
     background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
     padding: 2px 8px;
     border-radius: 4px;
     font-size: 11px;
@@ -176,7 +177,8 @@ header {
 
 .interest-tag {
     background-color: var(--card-bg);
-    padding: 5px 10px;
+    border: 1px solid var(--border-color);
+    padding: 2px 10px;
     border-radius: 4px;
     font-size: 11px;
 }
