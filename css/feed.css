@@ -57,9 +57,8 @@ header {
 } */
 
 .blog-article {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 8px;
+    /* background: var(--card-bg); */
+    padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -95,7 +94,6 @@ header {
 /* News Section */
 .article-container,
 .news-container {
-    background: none; /* Remove white background */
     max-width: 800px;
     margin: 0 auto;
 }
