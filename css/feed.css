@@ -1,0 +1,173 @@
+/* Header and Navigation */
+header {
+    margin-bottom: 20px;
+}
+
+.nav-tabs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.nav-link.active {
+    color: var(--link-color);
+}
+
+.briefly {
+    color: var(--link-color) !important;
+}
+
+.subscribe-btn {
+    background-color: var(--link-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Blog Articles */
+.article-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.blog-article {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.article-meta {
+    display: flex;
+    gap: 15px;
+    color: var(--text-color);
+    font-size: 11px;
+    margin: 5px 0;
+}
+
+.article-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.category {
+    background-color: var(--card-bg);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+/* News Items */
+.news-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.news-item {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.news-points {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 10px 0;
+}
+
+.news-points li {
+    padding-left: 15px;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.news-points li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+}
+
+.news-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 11px;
+}
+
+/* Interests */
+.interests-container {
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.interest-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.interest-tag {
+    background-color: var(--card-bg);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.update-interests {
+    background-color: var(--link-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Download Button */
+.download-btn {
+    background: none;
+    border: none;
+    color: var(--link-color);
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 760px) {
+    .nav-tabs {
+        flex-wrap: wrap;
+    }
+    
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .subscribe-btn {
+        width: 100%;
+    }
+}
